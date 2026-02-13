@@ -19,12 +19,23 @@ orgs.newOrg('technology.dataplane-signaling', 'eclipse-dataplane-signaling') {
       allow_update_branch: false,
       delete_branch_on_merge: false,
       description: "Specification covering Dataspace control plane communication with data planes",
+      gh_pages_build_type: "legacy",
+      gh_pages_source_path: "/",
+      gh_pages_source_branch: "gh-pages",
       secret_scanning: "disabled",
       secret_scanning_push_protection: "disabled",
       web_commit_signoff_required: false,
       workflows+: {
         default_workflow_permissions: "write",
       },
+      environments: [
+        orgs.newEnvironment('github-pages') {
+          branch_policies+: [
+            "gh-pages"
+          ],
+          deployment_branch_policy: "selected",
+        },
+      ],
       webhooks: [
         orgs.newRepoWebhook('https://webhook.zenhub.com/webhook/github/v2') {
           content_type: "json",
