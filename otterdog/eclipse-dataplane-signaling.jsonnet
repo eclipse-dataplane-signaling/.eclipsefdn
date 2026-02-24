@@ -57,5 +57,35 @@ orgs.newOrg('technology.dataplane-signaling', 'eclipse-dataplane-signaling') {
         },
       ],
     },
+    orgs.newRepo('endpoint-type-registry') {
+      allow_merge_commit: false,
+      allow_update_branch: false,
+      delete_branch_on_merge: false,
+      description: "Collection of schemas extending the DataAddress object for specific data transfer types",
+      gh_pages_build_type: "workflow",
+      gh_pages_source_path: null,
+      gh_pages_source_branch: null,
+      secret_scanning: "disabled",
+      secret_scanning_push_protection: "disabled",
+      web_commit_signoff_required: false,
+      workflows+: {
+        default_workflow_permissions: "write",
+      },
+      environments: [
+        orgs.newEnvironment('github-pages') {
+          branch_policies+: [
+            "main"
+          ],
+          deployment_branch_policy: "selected",
+        },
+      ],
+      branch_protection_rules: [
+        orgs.newBranchProtectionRule('main') {
+          required_approving_review_count: 1,
+          requires_pull_request: true,
+          requires_status_checks: true,
+        },
+      ],
+    },
   ],
 }
