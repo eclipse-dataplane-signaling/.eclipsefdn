@@ -31,7 +31,7 @@ orgs.newOrg('technology.dataplane-signaling', 'eclipse-dataplane-signaling') {
       environments: [
         orgs.newEnvironment('github-pages') {
           branch_policies+: [
-            "gh-pages"
+            "main"
           ],
           deployment_branch_policy: "selected",
         },
