@@ -117,6 +117,29 @@ orgs.newOrg('technology.dataplane-signaling', 'eclipse-dataplane-signaling') {
         },
       ],
     },
+    orgs.newRepo('profiles') {
+      allow_merge_commit: true,
+      allow_update_branch: false,
+      delete_branch_on_merge: false,
+      description: "Data Plane Signaling profiles",
+      gh_pages_build_type: "legacy",
+      gh_pages_source_path: "/",
+      gh_pages_source_branch: "gh-pages",
+      secret_scanning: "disabled",
+      secret_scanning_push_protection: "disabled",
+      web_commit_signoff_required: false,
+      workflows+: {
+        default_workflow_permissions: "write",
+      },
+      environments: [
+        orgs.newEnvironment('github-pages') {
+          branch_policies+: [
+            "main"
+          ],
+          deployment_branch_policy: "selected",
+        },
+      ]
+    },
   ],
 } + {
   # snippet added due to 'https://github.com/eclipsefdn/otterdog-configs/blob/main/blueprints/add-dot-github-repo.yml'
